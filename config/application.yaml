@@ -1,0 +1,26 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: Spring JPA
+  kafka:
+    properties:
+      schema.registry.url: http://localhost:8081
+      specific-avro-reader: true
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: group_id
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      properties:
+        specific.avro.reader: true
+  datasource:
+    driverClassName: com.sybase.jdbc4.jdbc.SybDriver
+    url: jdbc:sybase:Tds:localhost:4100/dbname
+    connectionTestQuery: select 1
+    username: username
+    password: password
+  jpa:
+    databasePlatform: org.hibernate.dialect.SybaseDialect
+    show-sql: true
